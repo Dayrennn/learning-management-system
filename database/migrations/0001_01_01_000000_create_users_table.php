@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->date("tanggalLahir");
-            $table->enum('role', ['admin', "guru", "siswa"])->default("siswa");
+            $table->enum('role', ['admin', "guru"])->default("guru");
             $table->string('password');
             $table->timestamps();
         });

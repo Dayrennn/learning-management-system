@@ -41,7 +41,9 @@ class authService
             throw new Exception("Email Wajib diisi");
         }
 
-        $existingUser = DB::table('users')->where($nomorInduk)->orWhere($email)->first();
+        $existingUser = User::where('nomorInduk', $nomorInduk)
+            ->orWhere('email', $email)
+            ->first();
 
         if (!$existingUser) {
             throw new Exception("User dengan nomor induk {$nomorInduk} atau email {$email} sudah terdaftar");
