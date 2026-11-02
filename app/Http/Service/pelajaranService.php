@@ -18,7 +18,7 @@ class pelajaranService
 
         $existingPelajaran = Pelajaran::where('namaPelajaran', $namaPelajaran)->first();
 
-        if (!$existingPelajaran) {
+        if ($existingPelajaran) {
             throw new Exception("Nama  Pelajaran Sudah Terdaftar");
         }
 

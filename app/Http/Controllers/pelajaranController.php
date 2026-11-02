@@ -6,6 +6,7 @@ use App\Http\Service\pelajaranService;
 use Error;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class pelajaranController extends Controller
 {
@@ -22,11 +23,12 @@ class pelajaranController extends Controller
         $validated = $request->validate([
             "namaPelajaran" => "required|string",
             "kodePelajaran" => "required|string",
-            'usersId' => 'nullable|uuid|exists:users,id' //boleh null, kalau diisi harus uuid dan harus berada di tabel users
         ]);
 
+        $userId = Auth::id();
+
         try {
-            $result = $this->pelajaranService->createPelajaran($validated["namaPelajaran"], $validated["kodePelajaran"], $validated["usersId"]);
+            $result = $this->pelajaranService->createPelajaran($validated["namaPelajaran"], $validated["kodePelajaran"], $userId);
 
         } catch (Error $e) {
             return response()->json(["success" => false, "message" => $e->getMessage()], 500);
