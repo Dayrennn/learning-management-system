@@ -7,7 +7,7 @@ use Exception;
 
 class pelajaranService 
 {
-    public function createPelajaran(string $namaPelajaran, string $kodePelajaran, ?string $usersId = null)
+    public function createPelajaran(string $namaPelajaran, string $kodePelajaran, string $usersId = null)
     {
         if (!$namaPelajaran) {
             throw new Exception("Nama Pelajaran Wajib diisi");
@@ -34,5 +34,16 @@ class pelajaranService
         $result = Pelajaran::get();
 
         return $result;
+    }
+
+    public function deletePelajaran(string $id)
+    {
+        $existingPelajaran = Pelajaran::where('id', $id)->delete();
+
+        if (!$existingPelajaran) {
+            throw new Exception("Pelajaran tidak terdaftar");
+        }
+
+        return true;
     }
 }

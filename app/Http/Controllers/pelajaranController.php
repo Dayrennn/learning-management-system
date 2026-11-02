@@ -51,4 +51,20 @@ class pelajaranController extends Controller
             "data" => $result
         ]);
     }
+
+    public function removePelajaran(Request $request): JsonResponse
+    {
+        try {
+            $id = $request->route('id');
+
+            $result = $this->pelajaranService->deletePelajaran($id);
+
+            return response()->json([
+                "success" => true,
+                "message" => "Berhasil menghapus data pelajaran"
+            ]);
+        }  catch (Error $e) {
+            return response()->json(["success" => false, "message" => $e->getMessage()], 404);
+        }
+    }
 }

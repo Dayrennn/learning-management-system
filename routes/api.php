@@ -19,4 +19,5 @@ Route::middleware('jwt')->group(function() {
 Route::middleware('jwt')->group(function() {
     Route::post('/create-pelajaran', [pelajaranController::class, "addPelajaran"]);
     Route::get('/lihat-pelajaran', [pelajaranController::class, "seeAllPelajaran"]);
+    Route::delete('/delete-pelajaran/{id}', [pelajaranController::class, "removePelajaran"]);
 });
